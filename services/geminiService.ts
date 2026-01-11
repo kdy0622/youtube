@@ -43,10 +43,13 @@ export const generateStrategy = async (input: string): Promise<ThumbnailStrategy
 export const generateThumbnailImage = async (prompt: string): Promise<string> => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
+  // YouTube 썸네일 최적화 모델 사용
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
     contents: {
-      parts: [{ text: `High-quality cinematic YouTube thumbnail background, 4k, vivid colors, deep shadows, clean composition, NO TEXT: ${prompt}` }]
+      parts: [
+        { text: `A high-quality cinematic 4k YouTube thumbnail background with NO TEXT. Vibrant colors, deep contrast, wide-angle cinematic shot: ${prompt}` }
+      ]
     },
     config: {
       imageConfig: {
@@ -55,14 +58,17 @@ export const generateThumbnailImage = async (prompt: string): Promise<string> =>
     }
   });
 
-  // Iterate through parts to find inlineData for the image
-  if (response.candidates?.[0]?.content?.parts) {
-    for (const part of response.candidates[0].content.parts) {
-      if (part.inlineData) {
+  // response.candidates[0].content.parts 배열 전체를 순회하여 inlineData(이미지)를 찾음
+  const candidate = response.candidates?.[0];
+  if (candidate?.content?.parts) {
+    for (const part of candidate.content.parts) {
+      if (part.inlineData && part.inlineData.data) {
         return `data:image/png;base64,${part.inlineData.data}`;
       }
     }
   }
   
-  throw new Error("Failed to generate image: No image data returned");
+  // 만약 이미지가 반환되지 않았을 경우, 재시도하거나 대체 텍스트 에러 발생
+  console.error("Gemini Image Response:", response);
+  throw new Error("No image data in response candidates");
 };
