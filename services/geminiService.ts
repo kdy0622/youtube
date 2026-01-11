@@ -16,7 +16,8 @@ You MUST respond in JSON format following the schema provided.
 `;
 
 export const generateStrategy = async (input: string): Promise<ThumbnailStrategy> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Always use {apiKey: process.env.API_KEY}
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
@@ -37,11 +38,13 @@ export const generateStrategy = async (input: string): Promise<ThumbnailStrategy
     }
   });
 
+  // Accessing response.text directly as a property
   return JSON.parse(response.text || '{}');
 };
 
 export const generateThumbnailImage = async (prompt: string): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Always use {apiKey: process.env.API_KEY}
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
