@@ -4,48 +4,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>유튜브 썸네일 만들기 - CTR Pro</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <title>CTR Pro - 유튜브 썸네일 전략가</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Jua&family=Do+Hyeon&family=Gamja+Flower&family=Poor+Story&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Do+Hyeon&family=Nanum+Pen+Script&family=Gamja+Flower&family=Poor+Story&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
     <style>
       @font-face {
         font-family: 'GmarketSansBold';
         src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+        font-weight: bold;
       }
       @font-face {
         font-family: 'TmonMonsie';
         src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsie.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+        font-weight: bold;
       }
-      body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
+      body { 
+        font-family: "Pretendard Variable", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
       .font-gmarket { font-family: 'GmarketSansBold', sans-serif; }
       .font-blackhan { font-family: 'Black Han Sans', sans-serif; }
-      .font-nanumpen { font-family: 'Nanum Pen Script', cursive; }
-      .font-pretendard { font-family: "Pretendard Variable", Pretendard, sans-serif; }
+      .font-tmon { font-family: 'TmonMonsie', sans-serif; }
       .font-jua { font-family: 'Jua', sans-serif; }
       .font-dohyeon { font-family: 'Do Hyeon', sans-serif; }
+      .font-nanum { font-family: 'Nanum Pen Script', cursive; }
       .font-gamja { font-family: 'Gamja Flower', cursive; }
-      .font-poorstory { font-family: 'Poor Story', system-ui; }
-      .font-tmon { font-family: 'TmonMonsie', sans-serif; }
+      .font-poor { font-family: 'Poor Story', system-ui; }
+      
+      /* 슬라이더 스타일 커스텀 */
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: #ef4444;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
-  }
-}
-</script>
-</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3"
+      }
+    }
+    </script>
+  </head>
   <body class="bg-slate-900 text-white min-h-screen">
     <div id="root"></div>
   </body>
